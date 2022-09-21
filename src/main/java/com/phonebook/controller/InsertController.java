@@ -3,8 +3,8 @@ package com.phonebook.controller;
 import com.phonebook.model.*;
 import com.phonebook.view.ContactsView;
 import com.phonebook.view.InsertView;
-
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,8 +56,16 @@ public class InsertController extends DataSourceConnection{
             addData.setInt(4, access);
             addData.executeUpdate();
             JOptionPane.showMessageDialog(null, "Contact Added");
+            resetTable();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+    }
+    public static void resetTable(){
+        DefaultTableModel removePubRow = (DefaultTableModel) ContactsView.getPubTable().getModel();
+        removePubRow.setRowCount(0);
+        DefaultTableModel removePrvRow = (DefaultTableModel) ContactsView.getPrvTable().getModel();
+        removePrvRow.setRowCount(0);
+        ContactsController.initContactsController();
     }
 }

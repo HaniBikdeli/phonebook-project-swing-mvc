@@ -12,18 +12,13 @@ import java.sql.SQLException;
 
 public class ContactsView extends DataSourceConnection {
     private static JFrame frame = new JFrame();
-    private static JFrame framePopUp = new JFrame();
     private static JPanel pubPhoneNums = new JPanel();
     private static JPanel prvPhoneNums = new JPanel();
-    private static JPanel rmContact = new JPanel();
     public static JTable pubTable = new JTable();
     public static JTable prvTable = new JTable();
     private static JLabel hpHeaderPub = new JLabel("Your Public Contacts");
     private static JLabel hpHeaderPrv = new JLabel("Your Private Contacts");
-    private static JLabel opsLabel = new JLabel("Choose Operation");
     private static JButton newNumBtn = new JButton("New Number");
-    private static JButton rmBtn = new JButton("remove");
-    private static JButton editBtn = new JButton("edit");
     private static JButton rmNumBtn = new JButton("Remove Number");
     private static Border border = new LineBorder(Color.gray, 3, true);
     private static DefaultTableModel pubTableModel = (DefaultTableModel) pubTable.getModel();
@@ -41,7 +36,7 @@ public class ContactsView extends DataSourceConnection {
         pubPhoneNums.setBounds(50, 45, 350, 200);
         pubPhoneNums.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
-        hpHeaderPrv.setBounds(75, 250, 125, 15);
+        hpHeaderPrv.setBounds(75, 260, 125, 15);
         prvPhoneNums.setBounds(50, 290, 350, 200);
         prvPhoneNums.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
