@@ -10,18 +10,9 @@ import com.phonebook.model.*;
 import com.phonebook.view.ContactsView;
 
 public class ContactsController extends DataSourceConnection{
-    private static LoginModel loginModel;
-    private static ContactsModel contactsModel;
-    private static ContactsView contactsView;
-    public ContactsController(ContactsModel m, ContactsView v){
-        contactsModel = m;
-        contactsView = v;
-        initContactsView();
-    }
-    public void initContactsView() {
-
-    }
-    public static void initController() {
+    private static ContactsModel contactsModel = new ContactsModel();
+    private static ContactsView contactsView = new ContactsView();
+    public static void initContactsController() {
         try {
             showData();
         } catch (SQLException throwables) {
@@ -51,14 +42,18 @@ public class ContactsController extends DataSourceConnection{
         String sql;
         if(auth == 1){
             sql = "Use PhoneBook" + " select FullName , PhoneNumber from dbo.contacts where auth = 1";
-        } else if (auth == 2 && loginModel.getId()==1) {
+            PreparedStatement pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+        } else if (auth == 2 && LoginModel.getId()==1) {
             sql = "Use PhoneBook" + " select FullName , PhoneNumber from dbo.contacts where auth = 2";
+            PreparedStatement pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
         }else{
             sql = "Use PhoneBook" + " select FullName , PhoneNumber from dbo.contacts where auth = 2 AND ownerId = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1 , LoginModel.getId());
+            rs = pst.executeQuery();
         }
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setInt(1 , loginModel.getId());
-        rs = pst.executeQuery(sql);
         ResultSetMetaData rsmd = rs.getMetaData();
         colNo = rsmd.getColumnCount();
         return rs;
@@ -88,7 +83,4 @@ public class ContactsController extends DataSourceConnection{
 
     }
 
-    public static void main(String[] args) {
-       initController();
-    }
 }

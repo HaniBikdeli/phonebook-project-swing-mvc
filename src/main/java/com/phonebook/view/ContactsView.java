@@ -31,18 +31,18 @@ public class ContactsView extends DataSourceConnection {
 
     public ContactsView() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(750, 450);
+        frame.setSize(750, 600);
         frame.setTitle("Home Page");
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
         frame.setBackground(Color.cyan);
 
         hpHeaderPub.setBounds(75, 10, 125, 15);
-        pubPhoneNums.setBounds(50, 45, 350, 125);
+        pubPhoneNums.setBounds(50, 45, 350, 200);
         pubPhoneNums.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
-        hpHeaderPrv.setBounds(75, 190, 125, 15);
-        prvPhoneNums.setBounds(50, 210, 350, 125);
+        hpHeaderPrv.setBounds(75, 250, 125, 15);
+        prvPhoneNums.setBounds(50, 290, 350, 200);
         prvPhoneNums.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
 //        pubTableModel = (DefaultTableModel) pubTable.getModel();

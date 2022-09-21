@@ -18,7 +18,7 @@ public class InsertView {
     static String[] accessOptions = {"Public", "Private"};
     static JComboBox<String> accessMenu = new JComboBox<>(accessOptions);
     public static void insertComponent(){
-        addContact.setBounds(450, 10, 250, 220);
+        addContact.setBounds(450, 30, 250, 220);
         addContact.setBorder(insertBorder);
 
         firstNameInput.setBounds(115, 25, 120, 25);
@@ -44,7 +44,7 @@ public class InsertView {
         addContact.setVisible(true);
     }
 
-    public  JPanel getAddContact() {
+    public static JPanel getAddContact() {
         return addContact;
     }
 

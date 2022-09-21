@@ -1,6 +1,7 @@
 package com.phonebook.controller;
 
 import com.phonebook.model.*;
+import com.phonebook.view.ContactsView;
 import com.phonebook.view.InsertView;
 
 import javax.swing.*;
@@ -9,18 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InsertController extends DataSourceConnection{
-    private static LoginModel loginModel;
-    private static InsertModel insertModel;
-    private static InsertView insertView;
-    public InsertController(InsertModel m , InsertView v){
-        insertModel = m;
-        insertView = v;
-    }
-    public void initLoginView(){
-        insertView.getFirstNameInput().setText(insertModel.getFirstName());
-        insertView.getPhoneNumInput().setText(insertModel.getPhoneNumber());
-    }
-    public void initLoginController(){
+    private static InsertModel insertModel = new InsertModel();
+    private static InsertView insertView = new InsertView();
+    public static void initInsertController(){
+        InsertView.insertComponent();
+        ContactsView.getFrame().add(InsertView.getAddContact());
         insertView.getInsertBtn().addActionListener(e -> insertBtnAction());
     }
     public static void countryMenu() throws SQLException {
@@ -58,7 +52,7 @@ public class InsertController extends DataSourceConnection{
             addData = con.prepareStatement("Use PhoneBook "+"insert into dbo.contacts (FullName , PhoneNumber ,ownerId , auth) values ( ? , ? ,?,?)");
             addData.setString(1, fullName);
             addData.setString(2, phoneNumber);
-            addData.setInt(3, loginModel.getId());
+            addData.setInt(3, LoginModel.getId());
             addData.setInt(4, access);
             addData.executeUpdate();
             JOptionPane.showMessageDialog(null, "Contact Added");

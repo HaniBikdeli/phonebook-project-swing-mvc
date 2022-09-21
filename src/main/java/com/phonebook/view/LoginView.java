@@ -6,7 +6,7 @@ import javax.swing.*;
 public class LoginView extends DataSourceConnection {
     public static JFrame frameLogin = new JFrame();
     public static JPasswordField passInput= new JPasswordField();
-    public static JTextField userInput = new JTextField("Enter Username");
+    public static JTextField userInput = new JTextField();
     public static JButton loginBtn = new JButton("Login");
     public static JLabel userLabel = new JLabel("Username");
     public static JLabel passLabel = new JLabel("Password");
