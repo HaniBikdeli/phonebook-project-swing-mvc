@@ -42,6 +42,7 @@ public class LoginController extends DataSourceConnection{
                 ContactsView contactsView = new ContactsView();
                 ContactsController.initContactsController();
                 InsertController.initInsertController();
+                SearchController.initSearchController();
             }
             else{
                 JOptionPane.showMessageDialog(null, "Login Failed.");

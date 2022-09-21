@@ -59,7 +59,6 @@ public class ContactsController extends DataSourceConnection{
                 setSelectedName(selectedName);
                 PopupView.popupForm();
             }
-
         });
     }
     static int colNo;

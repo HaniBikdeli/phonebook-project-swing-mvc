@@ -17,26 +17,26 @@ public class InsertController extends DataSourceConnection{
         ContactsView.getFrame().add(InsertView.getAddContact());
         insertView.getInsertBtn().addActionListener(e -> insertBtnAction());
     }
-    public static void countryMenu() throws SQLException {
-        JComboBox<String> provinceMenu = new JComboBox<>();
-        JComboBox<String> countryMenu = new JComboBox<>();
-        int countryId;
-        PreparedStatement comboBoxCountries = con.prepareStatement("Use PhoneBook "+"select * from dbo.countries");
-        ResultSet rs1=comboBoxCountries.executeQuery();
-        countryId = rs1.getInt("countryId");
-        while (rs1.next()) {
-            countryMenu.addItem(rs1.getString("CountryName"));
-        }
-        PreparedStatement comboBoxProvince = con.prepareStatement("Use PhoneBook "+"select * from dbo.provinces where provinceFk = ?");
-        comboBoxProvince.setInt(1,countryId);
-        ResultSet rs2=comboBoxProvince.executeQuery();
-
-        while (rs2.next()) {
-            provinceMenu.addItem(rs2.getString("ProvinceName"));
-        }
-        countryMenu.setBounds(10, 145, 90, 25);
-        provinceMenu.setBounds(115, 145, 120, 25);
-    }
+//    public static void countryMenu() throws SQLException {
+//        JComboBox<String> provinceMenu = new JComboBox<>();
+//        JComboBox<String> countryMenu = new JComboBox<>();
+//        int countryId;
+//        PreparedStatement comboBoxCountries = con.prepareStatement("Use PhoneBook "+"select * from dbo.countries");
+//        ResultSet rs1=comboBoxCountries.executeQuery();
+//        countryId = rs1.getInt("countryId");
+//        while (rs1.next()) {
+//            countryMenu.addItem(rs1.getString("CountryName"));
+//        }
+//        PreparedStatement comboBoxProvince = con.prepareStatement("Use PhoneBook "+"select * from dbo.provinces where provinceFk = ?");
+//        comboBoxProvince.setInt(1,countryId);
+//        ResultSet rs2=comboBoxProvince.executeQuery();
+//
+//        while (rs2.next()) {
+//            provinceMenu.addItem(rs2.getString("ProvinceName"));
+//        }
+//        countryMenu.setBounds(10, 145, 90, 25);
+//        provinceMenu.setBounds(115, 145, 120, 25);
+//    }
     public static void insertBtnAction(){
         PreparedStatement addData;
         String fullName = insertView.getFirstNameInput().getText();
