@@ -3,6 +3,7 @@ package com.phonebook.controller;
 import com.phonebook.view.EditView;
 import com.phonebook.view.PopupView;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -26,7 +27,12 @@ public class PopupController extends DataSourceConnection{
         }
     }
     public static void editBtnAction(){
-        EditView.editForm();
+        if (ContactsController.getSelectedContactOwnerId() == LoginController.getId())
+            EditView.editForm();
+        else
+            JOptionPane.showMessageDialog(null, "This Contact is not yours");
+
+
     }
 
 }

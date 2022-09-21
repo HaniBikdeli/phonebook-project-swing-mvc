@@ -52,4 +52,12 @@ public class LoginController extends DataSourceConnection{
             throw new RuntimeException(ex);
         }
     }
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        LoginController.id = id;
+    }
 }

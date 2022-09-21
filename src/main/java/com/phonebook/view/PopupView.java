@@ -30,10 +30,6 @@ public class PopupView{
         framePopUp.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        popupForm();
-    }
-
     public static JFrame getFramePopUp() {
         return framePopUp;
     }

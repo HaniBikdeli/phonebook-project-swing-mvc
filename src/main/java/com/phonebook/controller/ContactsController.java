@@ -17,6 +17,7 @@ public class ContactsController extends DataSourceConnection{
     private static ContactsModel contactsModel = new ContactsModel();
     private static String selectedPhoneNumber = null;
     private static String selectedName = null;
+    private static int selectedContactOwnerId;
     public static void initContactsController() {
         try {
             showData();
@@ -50,13 +51,26 @@ public class ContactsController extends DataSourceConnection{
 
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                int[] selectedRow =  ContactsView.prvTable.getSelectedRows();
-                for (int i = 0; i < selectedRow.length; i++) {
-                    selectedName = (String) ContactsView.prvTable.getValueAt(selectedRow[i], 0);
-                    selectedPhoneNumber = (String) ContactsView.prvTable.getValueAt(selectedRow[i], 1);
+
+                int[] selectedPrvRow =  ContactsView.prvTable.getSelectedRows();
+                for (int i = 0; i < selectedPrvRow.length; i++) {
+                    selectedName = (String) ContactsView.prvTable.getValueAt(selectedPrvRow[i], 0);
+                    selectedPhoneNumber = (String) ContactsView.prvTable.getValueAt(selectedPrvRow[i], 1);
+                    setSelectedPhoneNumber(selectedPhoneNumber);
+                    setSelectedName(selectedName);
+                    try {
+                        PreparedStatement ownerId;
+                        ownerId = con.prepareStatement("Use PhoneBook "+"SELECT ownerId FROM dbo.contacts WHERE FullName = ? AND PhoneNumber = ?");
+                        ownerId.setString(1, getSelectedName());
+                        ownerId.setString(2, getSelectedPhoneNumber());
+                        ResultSet rs = ownerId.executeQuery();
+                        while (rs.next())
+                            selectedContactOwnerId = rs.getInt(1);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
-                setSelectedPhoneNumber(selectedPhoneNumber);
-                setSelectedName(selectedName);
+                setSelectedContactOwnerId(selectedContactOwnerId);
                 PopupView.popupForm();
             }
         });
@@ -125,5 +139,13 @@ public class ContactsController extends DataSourceConnection{
 
     public static void setSelectedName(String selectedName) {
         ContactsController.selectedName = selectedName;
+    }
+
+    public static int getSelectedContactOwnerId() {
+        return selectedContactOwnerId;
+    }
+
+    public static void setSelectedContactOwnerId(int selectedContactOwnerId) {
+        ContactsController.selectedContactOwnerId = selectedContactOwnerId;
     }
 }

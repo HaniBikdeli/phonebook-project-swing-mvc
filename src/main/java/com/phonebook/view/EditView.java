@@ -35,10 +35,6 @@ public class EditView {
         editFrame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        editForm();
-    }
-
     public static JFrame getEditFrame() {
         return editFrame;
     }

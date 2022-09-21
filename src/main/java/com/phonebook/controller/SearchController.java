@@ -7,6 +7,7 @@ import com.phonebook.view.ContactsView;
 import com.phonebook.view.SearchView;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -30,6 +31,23 @@ public class SearchController extends DataSourceConnection{
                 showSearchData();
                 ContactsView.pubTable.setModel(searchModel.getPubTableModel());
                 ContactsView.prvTable.setModel(searchModel.getPrvTableModel());
+                ContactsView.pubTable.setDefaultEditor(Object.class, null);
+                ContactsView.prvTable.setDefaultEditor(Object.class, null);
+
+
+                TableColumnModel pubColumnModel = ContactsView.pubTable.getColumnModel();
+                pubColumnModel.getColumn(0).setPreferredWidth(75);
+                pubColumnModel.getColumn(1).setPreferredWidth(120);
+                pubColumnModel.getColumn(2).setPreferredWidth(75);
+                pubColumnModel.getColumn(3).setPreferredWidth(75);
+
+
+                TableColumnModel prvColumnModel = ContactsView.prvTable.getColumnModel();
+                prvColumnModel.getColumn(0).setPreferredWidth(75);
+                prvColumnModel.getColumn(1).setPreferredWidth(120);
+                prvColumnModel.getColumn(2).setPreferredWidth(75);
+                prvColumnModel.getColumn(3).setPreferredWidth(75);
+
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -40,7 +58,7 @@ public class SearchController extends DataSourceConnection{
         sql = "Use PhoneBook" + " select FullName , PhoneNumber from dbo.contacts where auth = ? and FullName like ? and ownerId = ?";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setInt(1 , auth);
-        pst.setString(2 , SearchView.getSearchInput().getText());
+        pst.setString(2 ,"%"+SearchView.getSearchInput().getText()+"%");
         pst.setInt(3 , LoginModel.getId());
         rs = pst.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -52,13 +70,15 @@ public class SearchController extends DataSourceConnection{
         prvTableModel.setColumnIdentifiers(cols);
         ResultSet rs1 = readSearchData(1);
         Object[] data;
-        while (rs1.next()) {
-            data = new Object[colNo];
-            for (int i = 0; i < colNo; i++) {
-                data[i] = rs1.getObject(i + 1);
+        if(rs1.next()) {
+            while (rs1.next()) {
+                data = new Object[colNo];
+                for (int i = 0; i < colNo; i++) {
+                    data[i] = rs1.getObject(i + 1);
+                }
+                pubTableModel.addRow(data);
+                searchModel.setPubTableModel(pubTableModel);
             }
-            pubTableModel.addRow(data);
-            searchModel.setPubTableModel(pubTableModel);
         }
         ResultSet rs2 = readSearchData(2);
         while (rs2.next()) {

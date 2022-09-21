@@ -23,6 +23,8 @@ public class ContactsView extends DataSourceConnection {
     private static Border border = new LineBorder(Color.gray, 3, true);
     private static DefaultTableModel pubTableModel = (DefaultTableModel) pubTable.getModel();
     private static DefaultTableModel prvTableModel = (DefaultTableModel) prvTable.getModel();
+//    JScrollPane pubScrollPane=new JScrollPane(pubTable);
+//    JScrollPane prvScrollPane=new JScrollPane(prvTable);
 
     public ContactsView() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,32 +42,26 @@ public class ContactsView extends DataSourceConnection {
         prvPhoneNums.setBounds(50, 290, 350, 200);
         prvPhoneNums.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
-//        pubTableModel = (DefaultTableModel) pubTable.getModel();
-//        prvTableModel = (DefaultTableModel) prvTable.getModel();
-
-//        PhoneBookLogin.showData();
-        prvPhoneNums.setBorder(border);
-
-//        rmBtn.addActionListener(this);
+//        pubScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+//        pubScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//        prvScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+//        prvScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//
+//
+//        pubPhoneNums.add(pubScrollPane,BorderLayout.CENTER);
+//        prvPhoneNums.add(prvScrollPane,BorderLayout.CENTER);
         pubPhoneNums.add(pubTable);
         prvPhoneNums.add(prvTable);
 
         newNumBtn.setBounds(38, 360, 130, 25);
-//        newNumBtn.addActionListener(newNum);
+
         rmNumBtn.setBounds(180, 360, 130, 25);
-//        rmNumBtn.addActionListener(rmNum);
+
         frame.add(hpHeaderPub);
         frame.add(hpHeaderPrv);
         frame.add(pubPhoneNums);
         frame.add(prvPhoneNums);
-//        frame.add(addContact);
-//        frame.add(searchContact);
 
-//        PhoneBookRm.removePage();
-//        PhoneBookInsert insert = new PhoneBookInsert();
-//        insert.insertPage();
-//        PhoneBookSearch search = new PhoneBookSearch();
-//        search.searchPage();
         frame.setVisible(true);
     }
     public static JFrame getFrame() {
